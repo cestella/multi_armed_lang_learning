@@ -1,0 +1,112 @@
+arms:
+  - arm_id: description_scene
+    intent: "Elicit descriptive language about a place, person, or scene"
+    cefr_min: "A2"
+    prompt_templates:
+      - "Can you describe what your neighborhood looks like?"
+      - "Tell me about a place you visited recently — what did it look like?"
+      - "Describe your favorite room in your home."
+    fallback_nudges:
+      - "What does your street look like in the morning?"
+      - "Describe the view from your window."
+    tags: [description]
+    target_skills:
+      vocabulary_description: 0.7
+      agreement: 0.3
+    cefr_domains: [description, conversation]
+
+  - arm_id: emotion_reaction
+    intent: "Elicit emotional reactions, opinions about feelings"
+    prompt_templates:
+      - "How did that make you feel?"
+      - "What's something that surprised you recently?"
+      - "Tell me about a time you felt really proud of something."
+    fallback_nudges:
+      - "What made you happy this week?"
+      - "Was there anything frustrating lately?"
+    tags: [emotion, opinion]
+    target_skills:
+      vocabulary_description: 0.4
+      past_narration: 0.4
+      agreement: 0.2
+    cefr_domains: [conversation, opinion]
+
+  - arm_id: hypothetical_future
+    intent: "Elicit conditional/future tense, planning language"
+    cefr_min: "B1-"
+    prompt_templates:
+      - "If you could live anywhere, where would you go?"
+      - "What would you do if you had a free week?"
+      - "Where do you think you'll be in five years?"
+    fallback_nudges:
+      - "What would your ideal weekend look like?"
+      - "If you could learn any skill instantly, what would it be?"
+    tags: [hypothetical, future]
+    target_skills:
+      conditional_future: 0.8
+      vocabulary_description: 0.2
+    cefr_domains: [conversation, opinion]
+
+  - arm_id: instruction_explain
+    intent: "Elicit procedural or explanatory language"
+    cefr_min: "A2"
+    prompt_templates:
+      - "How do you make your favorite dish?"
+      - "Can you explain how to get to your workplace from home?"
+      - "Walk me through your morning routine."
+    fallback_nudges:
+      - "How would you explain your job to a child?"
+      - "What steps do you follow to make coffee?"
+    tags: [instruction, procedure]
+    target_skills:
+      vocabulary_description: 0.4
+      preposition_usage: 0.3
+      agreement: 0.3
+    cefr_domains: [description]
+
+  - arm_id: narrative_yesterday
+    intent: "Elicit past-tense narration about recent events"
+    prompt_templates:
+      - "What did you do yesterday?"
+      - "Tell me about something interesting that happened this week."
+      - "How was your weekend?"
+      - "What did you have for dinner last night?"
+    fallback_nudges:
+      - "What was the last thing you did before going to bed?"
+      - "Did anything unexpected happen today?"
+    tags: [narrative, past]
+    target_skills:
+      past_narration: 0.8
+      vocabulary_description: 0.2
+    cefr_domains: [narration, conversation]
+
+  - arm_id: discussion_question
+    intent: "Pose a genuinely interesting, open-ended question about the topic and follow wherever the learner takes it. React to what they say; don't steer toward a grammar target."
+    prompt_templates:
+      - "What do you think about that?"
+      - "That's interesting — can you tell me more?"
+      - "What's your take on this?"
+    fallback_nudges:
+      - "What comes to mind when you think about this?"
+      - "How does that make you see things?"
+    tags: [discussion, opinion]
+    target_skills:
+      vocabulary_description: 0.5
+      agreement: 0.5
+    cefr_domains: [conversation, opinion, comprehension]
+
+  - arm_id: opinion_compare
+    intent: "Elicit comparative language and opinion expression"
+    prompt_templates:
+      - "Do you prefer cooking at home or eating out? Why?"
+      - "Which season do you like best and why?"
+      - "What's better: a big city or a small town?"
+    fallback_nudges:
+      - "Do you prefer mornings or evenings?"
+      - "Which do you enjoy more: reading or watching films?"
+    tags: [opinion, comparison]
+    target_skills:
+      vocabulary_description: 0.4
+      agreement: 0.3
+      conditional_future: 0.3
+    cefr_domains: [opinion, conversation]

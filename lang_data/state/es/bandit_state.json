@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "algo": "ucb1",
+  "c": 0.7,
+  "cooldown_max_repeat": 2,
+  "cooldown_penalty": 0.15,
+  "total_pulls": 7,
+  "arms": {
+    "description_scene": {
+      "n": 1,
+      "mean": 0.2
+    },
+    "emotion_reaction": {
+      "n": 2,
+      "mean": 0.6425
+    },
+    "hypothetical_future": {
+      "n": 1,
+      "mean": 0.6086
+    },
+    "instruction_explain": {
+      "n": 1,
+      "mean": 0.6164
+    },
+    "narrative_yesterday": {
+      "n": 1,
+      "mean": 0.21620000000000003
+    },
+    "opinion_compare": {
+      "n": 1,
+      "mean": 0.24320000000000003
+    }
+  },
+  "recent_arms": [
+    "opinion_compare",
+    "emotion_reaction"
+  ],
+  "processed_turn_ids": [
+    "fcb8a9b4-2b49-481c-9898-185ac0a245f5",
+    "b99884f0-daa8-49b0-ab58-b071d7da2e86",
+    "09f95ca5-4e64-4cfa-95e8-2a51bec27834",
+    "68ad3b6a-1695-4984-aa62-fc312af3b317",
+    "66f4e4cd-6149-497a-a43c-f347fb9acf1f",
+    "20941747-5856-4485-8a1f-3dd0604fcada",
+    "a4b2b711-d0c4-46ab-a493-3c19f03959cf"
+  ]
+}

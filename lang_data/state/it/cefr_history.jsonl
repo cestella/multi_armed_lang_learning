@@ -1,0 +1,8 @@
+{"ts": "2026-06-21T01:48:33.478000+00:00", "overall": "A1", "domains": {}, "confidence": {"overall": 0.0}}
+{"ts": "2026-06-21T01:51:52.904776+00:00", "overall": "A1", "domains": {}, "confidence": {"overall": 0.0}}
+{"ts": "2026-06-21T01:53:30.616451+00:00", "overall": "A1", "domains": {}, "confidence": {"overall": 0.0}}
+{"ts": "2026-06-21T02:18:43.273148+00:00", "overall": "A1", "domains": {}, "confidence": {"overall": 0.0}}
+{"ts": "2026-06-21T02:25:24.479727+00:00", "overall": "A1", "domains": {}, "confidence": {"overall": 0.0}}
+{"ts": "2026-06-21T02:27:54.718885+00:00", "overall": "A1", "domains": {"comprehension": "A1"}, "confidence": {"overall": 0.03, "comprehension": 0.03}}
+{"ts": "2026-06-21T10:47:00.485392+00:00", "overall": "A1", "domains": {"comprehension": "A2", "conversation": "A1", "opinion": "A1"}, "confidence": {"overall": 0.04, "comprehension": 0.07, "conversation": 0.03, "opinion": 0.03}}
+{"ts": "2026-06-21T11:00:24.678020+00:00", "overall": "A2", "domains": {"comprehension": "A2", "conversation": "A1", "opinion": "A1"}, "confidence": {"overall": 0.08, "comprehension": 0.1, "conversation": 0.07, "opinion": 0.07}}

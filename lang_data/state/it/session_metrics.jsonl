@@ -1,0 +1,8 @@
+{"ts": "2026-06-21T01:48:33.478000+00:00", "target_attempted": false, "target_success": "no", "avoidance": "none", "fluency_proxy": 0.5, "novelty_proxy": 0.5, "arm_id": "hypothetical_future"}
+{"ts": "2026-06-21T01:51:52.904776+00:00", "target_attempted": false, "target_success": "no", "avoidance": "none", "fluency_proxy": 0.5, "novelty_proxy": 0.5, "arm_id": "hypothetical_future"}
+{"ts": "2026-06-21T01:53:30.616451+00:00", "target_attempted": false, "target_success": "no", "avoidance": "none", "fluency_proxy": 0.5, "novelty_proxy": 0.5, "arm_id": "instruction_explain"}
+{"ts": "2026-06-21T02:18:43.273148+00:00", "target_attempted": false, "target_success": "no", "avoidance": "none", "fluency_proxy": 0.5, "novelty_proxy": 0.5, "arm_id": "instruction_explain"}
+{"ts": "2026-06-21T02:25:24.479727+00:00", "target_attempted": false, "target_success": "no", "avoidance": "weak", "fluency_proxy": 0.5, "novelty_proxy": 0.4, "arm_id": "instruction_explain"}
+{"ts": "2026-06-21T02:27:54.718885+00:00", "target_attempted": true, "target_success": "partial", "avoidance": "none", "fluency_proxy": 0.6, "novelty_proxy": 0.7, "arm_id": "opinion_compare"}
+{"ts": "2026-06-21T10:47:00.485392+00:00", "target_attempted": true, "target_success": "no", "avoidance": "none", "fluency_proxy": 0.3, "novelty_proxy": 0.6, "arm_id": "emotion_reaction"}
+{"ts": "2026-06-21T11:00:24.678020+00:00", "target_attempted": true, "target_success": "no", "avoidance": "none", "fluency_proxy": 0.5, "novelty_proxy": 0.7, "arm_id": "emotion_reaction"}

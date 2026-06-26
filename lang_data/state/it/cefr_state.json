@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "language": "it",
+  "overall_estimate": "A2",
+  "domains": {
+    "comprehension": "A2",
+    "conversation": "A1",
+    "opinion": "A1"
+  },
+  "confidence": {
+    "overall": 0.08,
+    "comprehension": 0.1,
+    "conversation": 0.07,
+    "opinion": 0.07
+  },
+  "evidence": {
+    "comprehension": {
+      "attempt_rate": 0.38587499999999997,
+      "success_rate": 0.0541875,
+      "avoidance_rate": 0.0,
+      "fluency_avg": 0.4853375,
+      "novelty_avg": 0.564425,
+      "turn_count": 3
+    },
+    "conversation": {
+      "attempt_rate": 0.27749999999999997,
+      "success_rate": 0.0,
+      "avoidance_rate": 0.0,
+      "fluency_avg": 0.4745,
+      "novelty_avg": 0.54275,
+      "turn_count": 2
+    },
+    "opinion": {
+      "attempt_rate": 0.27749999999999997,
+      "success_rate": 0.0,
+      "avoidance_rate": 0.0,
+      "fluency_avg": 0.4745,
+      "novelty_avg": 0.54275,
+      "turn_count": 2
+    }
+  },
+  "last_updated": "2026-06-21T11:00:24.674199+00:00"
+}

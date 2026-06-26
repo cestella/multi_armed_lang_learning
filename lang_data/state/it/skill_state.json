@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "language": "it",
+  "skills": {
+    "vocabulary_description": {
+      "mastery": 0.5,
+      "confidence": 0.19,
+      "scaffold_need": 0.39999999999999997,
+      "last_seen": "2026-06-21T11:00:24.670891+00:00"
+    },
+    "past_narration": {
+      "mastery": 0.5,
+      "confidence": 0.19,
+      "scaffold_need": 0.39999999999999997,
+      "last_seen": "2026-06-21T11:00:24.670891+00:00"
+    },
+    "agreement": {
+      "mastery": 0.5,
+      "confidence": 0.19,
+      "scaffold_need": 0.39999999999999997,
+      "last_seen": "2026-06-21T11:00:24.670891+00:00"
+    }
+  },
+  "updated_at": "2026-06-21T11:00:24.670957+00:00"
+}

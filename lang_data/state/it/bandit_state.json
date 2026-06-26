@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "algo": "ucb1",
+  "c": 0.7,
+  "cooldown_max_repeat": 2,
+  "cooldown_penalty": 0.15,
+  "total_pulls": 13,
+  "arms": {
+    "description_scene": {
+      "n": 1,
+      "mean": 0.13
+    },
+    "emotion_reaction": {
+      "n": 2,
+      "mean": 0.6615
+    },
+    "hypothetical_future": {
+      "n": 2,
+      "mean": 0.4485
+    },
+    "instruction_explain": {
+      "n": 3,
+      "mean": 0.5276666666666666
+    },
+    "narrative_yesterday": {
+      "n": 2,
+      "mean": 0.6295
+    },
+    "opinion_compare": {
+      "n": 3,
+      "mean": 0.646
+    }
+  },
+  "recent_arms": [
+    "instruction_explain",
+    "opinion_compare"
+  ],
+  "processed_turn_ids": [
+    "100cb0ee-c31f-41da-b26b-e85ec80d2fd5",
+    "ae2ee34a-1b91-4dcf-8cd7-49f063ff098f",
+    "02d0eaef-200d-4537-8330-4a136971d780",
+    "b0a82899-f786-45e7-a210-102fad35f7d7",
+    "28bdc51d-1720-4e30-8553-355a0060c228",
+    "81c0833c-ebe8-42de-97ce-1431af4d323d",
+    "053e2ac4-da60-4e76-b9a8-788904412030",
+    "cb5226ae-a840-44f7-a574-15f442bb9ff9",
+    "3d9037d6-2a43-4724-b12e-eceb027a4dd1",
+    "2d37db91-f1e3-4e56-a41a-a48a127fc99f",
+    "1114eb69-7270-4d1d-bb8a-67e8f7b11dee",
+    "8594f5db-2d70-4a0b-8d53-d3c97fe1ed29",
+    "04430733-de0b-402e-b6aa-a4e0cb296d66"
+  ]
+}

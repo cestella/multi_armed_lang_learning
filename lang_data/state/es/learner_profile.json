@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "language": "es",
+  "created_at": "2026-03-06T18:40:58.878767+00:00",
+  "updated_at": "2026-03-06T20:03:35.055311+00:00",
+  "preferences": {},
+  "recurring_wins": [
+    {
+      "label": "emotion",
+      "count": 1
+    }
+  ],
+  "recurring_fixes": [
+    {
+      "label": "word_choice",
+      "count": 1
+    },
+    {
+      "label": "gender_article",
+      "count": 1
+    },
+    {
+      "label": "agreement",
+      "count": 2
+    },
+    {
+      "label": "orthography",
+      "count": 3
+    },
+    {
+      "label": "preposition_use",
+      "count": 1
+    },
+    {
+      "label": "verb_conjugation",
+      "count": 2
+    }
+  ],
+  "recent_focus": {
+    "label": "orthography",
+    "since": "2026-03-06T20:03:35.055244+00:00"
+  }
+}

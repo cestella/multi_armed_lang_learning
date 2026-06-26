@@ -1,0 +1,96 @@
+Screen {
+    layout: vertical;
+}
+
+Header {
+    dock: top;
+    height: 1;
+}
+
+Footer {
+    dock: bottom;
+    height: 1;
+}
+
+#user-input {
+    dock: bottom;
+    width: 100%;
+    max-height: 3;
+}
+
+#star-rating {
+    dock: bottom;
+    height: 3;
+    display: none;
+    padding: 0 1;
+}
+
+#star-rating.visible {
+    display: block;
+}
+
+#star-label {
+    width: auto;
+    padding: 1 1 0 0;
+}
+
+.star-button {
+    min-width: 5;
+    margin: 0 1 0 0;
+}
+
+#debug-panel {
+    dock: bottom;
+    border: solid $warning;
+    padding: 1;
+    display: none;
+    height: 10;
+}
+
+#debug-panel.visible {
+    display: block;
+}
+
+#main-panes {
+    height: 1fr;
+}
+
+#conversation {
+    width: 1fr;
+    border: solid $primary;
+    overflow-y: auto;
+    padding: 1;
+}
+
+#feedback-rail {
+    width: 1fr;
+    border: solid $secondary;
+    padding: 1;
+    overflow-y: auto;
+}
+
+.message-user {
+    color: $text;
+    margin-bottom: 1;
+}
+
+.message-assistant {
+    color: $success;
+    margin-bottom: 1;
+}
+
+.message-system {
+    color: $warning-darken-1;
+    margin-bottom: 1;
+    text-style: italic;
+}
+
+.feedback-label {
+    color: $secondary;
+    text-style: bold;
+    margin-bottom: 0;
+}
+
+.feedback-text {
+    margin-bottom: 1;
+}

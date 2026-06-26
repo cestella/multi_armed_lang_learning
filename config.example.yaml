@@ -1,0 +1,24 @@
+# Language Tutor — LLM configuration
+# Copy this file to config.yaml and fill in your settings.
+# API keys should be set as environment variables, not here.
+
+# --- Option 1: Local ds4 (free, DeepSeek V4 on your own hardware) ---
+# model: "openai/deepseek-v4"
+# api_base: "http://192.168.1.100:8000/v1"
+# api_key: "not-needed"
+
+# --- Option 2: Anthropic Claude (set ANTHROPIC_API_KEY env var) ---
+# model: "anthropic/claude-sonnet-4-6"
+
+# --- Option 3: OpenAI (set OPENAI_API_KEY env var) ---
+# model: "openai/gpt-4o"
+
+# Uncomment and edit one option above, then save as config.yaml.
+
+model: "openai/deepseek-v4"
+api_base: "http://localhost:8000/v1"
+api_key: "not-needed"
+
+# Optional tuning
+timeout: 30       # seconds per LLM request
+max_tokens: 1024
