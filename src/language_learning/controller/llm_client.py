@@ -51,6 +51,10 @@ Respond with ONLY a JSON object matching this schema exactly:
 {schema}
 
 Rules:
+- Calibrate praise, fix_one, micro_rule, and recast to the student's CEFR level:
+  - A1–A2: use simple vocabulary in feedback, focus on basic grammar (articles, present tense, common verbs), keep explanations short
+  - A2+–B1-: introduce slightly more nuanced corrections (past vs imperfect, prepositions, agreement), brief grammar terms are OK
+  - B1+: address subtler issues (subjunctive, register, idiomatic usage), use standard grammar terminology
 - praise must highlight something genuinely good, not generic
 - fix_one must name exactly one error or improvement — the highest-priority one
 - target_success is whether the student demonstrated the conversational goal
@@ -79,6 +83,22 @@ Your goal for this opening: {arm_intent}
 Rules:
 - Write a natural, engaging opening message of 2–3 sentences in {language_name}
 - End with a question that invites the student to respond
+{cefr_rule}"""
+
+_STORY_SYSTEM = """\
+You are a {personality_desc} {language_name} language tutor.
+Write a short story (4–6 sentences) in {language_name} about: {topic}
+
+Grammar focus for this story: {arm_intent}
+{learner_context}
+
+Rules:
+- The story MUST naturally demonstrate the grammar pattern: {arm_intent}
+- Write 4–6 sentences in {language_name}
+- After the story, ask ONE engaging follow-up question in {language_name}
+- The question should NOT be simple plot recall — instead ask for the student's opinion, \
+speculation about what happens next, a personal connection, or retelling in their own words
+- Separate the story from the question with a blank line
 {cefr_rule}"""
 
 
@@ -368,6 +388,57 @@ class LLMClient:
             return (response.choices[0].message.content or "").strip()
         except Exception as exc:
             raise LLMError(f"generate_response() API call failed: {exc}") from exc
+
+    async def generate_story(
+        self,
+        language: str,
+        session_context: SessionContext | None = None,
+        arm: Arm | None = None,
+        cefr_state: CefrState | None = None,
+        cefr_level_override: str | None = None,
+        learner_profile: LearnerProfile | None = None,
+        skill_state: SkillState | None = None,
+        topic_override: str | None = None,
+    ) -> str:
+        """Generate a short story with a follow-up question as a session opener.
+
+        Raises LLMError on failure.
+        """
+        from language_learning.models.session_context import PERSONALITIES
+
+        language_name = _LANGUAGE_NAMES.get(language, language.title())
+        topic = topic_override or (session_context.topic if session_context else "daily life")
+        personality = session_context.personality if session_context else "encouraging"
+        personality_desc = PERSONALITIES.get(personality, personality)
+
+        level = cefr_level_override or (
+            getattr(cefr_state, "overall_estimate", None) if cefr_state else None
+        )
+        arm_intent = arm.intent if arm else "open a natural, friendly conversation"
+        learner_ctx = self._learner_context(
+            learner_profile, skill_state, cefr_state, cefr_level_override
+        )
+
+        system = _STORY_SYSTEM.format(
+            personality_desc=personality_desc,
+            language_name=language_name,
+            topic=topic,
+            arm_intent=arm_intent,
+            learner_context=learner_ctx,
+            cefr_rule=_cefr_grammar_rule(level),
+        )
+
+        kwargs = self._call_kwargs()
+        kwargs["max_tokens"] = max(kwargs.get("max_tokens", 1024), 1500)
+
+        try:
+            response = await litellm.acompletion(
+                **kwargs,
+                messages=[{"role": "user", "content": system}],
+            )
+            return (response.choices[0].message.content or "").strip()
+        except Exception as exc:
+            raise LLMError(f"generate_story() API call failed: {exc}") from exc
 
     async def initiate(
         self,
