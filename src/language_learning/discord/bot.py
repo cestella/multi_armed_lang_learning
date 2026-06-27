@@ -334,11 +334,7 @@ async def _stats_cmd(interaction: discord.Interaction) -> None:
     bot: LanguageTutorBot = interaction.client  # type: ignore[assignment]
     user_id = interaction.user.id
 
-    if user_id not in bot._active_sessions:
-        await interaction.response.send_message("No active session.", ephemeral=True)
-        return
-
-    language = bot._active_sessions[user_id]
+    language = bot._active_sessions.get(user_id, bot.discord_config.default_language)
     controller = await bot.registry.get(str(user_id), language)
     text = controller.get_stats()
     await interaction.response.send_message(f"```\n{text}\n```", ephemeral=True)
@@ -349,11 +345,7 @@ async def _cefr_cmd(interaction: discord.Interaction) -> None:
     bot: LanguageTutorBot = interaction.client  # type: ignore[assignment]
     user_id = interaction.user.id
 
-    if user_id not in bot._active_sessions:
-        await interaction.response.send_message("No active session.", ephemeral=True)
-        return
-
-    language = bot._active_sessions[user_id]
+    language = bot._active_sessions.get(user_id, bot.discord_config.default_language)
     controller = await bot.registry.get(str(user_id), language)
     text = controller.get_cefr_summary()
     await interaction.response.send_message(f"```\n{text}\n```", ephemeral=True)
@@ -364,11 +356,7 @@ async def _why_cmd(interaction: discord.Interaction) -> None:
     bot: LanguageTutorBot = interaction.client  # type: ignore[assignment]
     user_id = interaction.user.id
 
-    if user_id not in bot._active_sessions:
-        await interaction.response.send_message("No active session.", ephemeral=True)
-        return
-
-    language = bot._active_sessions[user_id]
+    language = bot._active_sessions.get(user_id, bot.discord_config.default_language)
     controller = await bot.registry.get(str(user_id), language)
     text = controller.get_why()
     await interaction.response.send_message(f"```\n{text}\n```", ephemeral=True)
