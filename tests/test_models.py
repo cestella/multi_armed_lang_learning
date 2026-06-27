@@ -83,7 +83,7 @@ class TestArmsLoader:
     def test_load_arms_yaml(self):
         arms_path = Path(__file__).parent.parent / "arms" / "arms.yaml"
         arms = load_arms(arms_path)
-        assert len(arms) == 7
+        assert len(arms) == 12
         arm_ids = {a.arm_id for a in arms}
         assert "narrative_yesterday" in arm_ids
         assert "opinion_compare" in arm_ids

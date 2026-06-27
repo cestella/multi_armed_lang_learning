@@ -110,3 +110,82 @@ arms:
       agreement: 0.3
       conditional_future: 0.3
     cefr_domains: [opinion, conversation]
+
+  - arm_id: greeting_introduction
+    intent: "Simple greetings, self-introduction, basic questions (name, origin, likes)"
+    prompt_templates:
+      - "Hi! What's your name and where are you from?"
+      - "Tell me a little about yourself."
+      - "What are some things you like to do?"
+    fallback_nudges:
+      - "How do you say hello in your language?"
+      - "What's your favorite color?"
+    tags: [greeting, introduction]
+    target_skills:
+      vocabulary_description: 0.5
+      agreement: 0.5
+    cefr_domains: [conversation]
+
+  - arm_id: daily_routine
+    intent: "Present-tense description of habits and daily activities"
+    prompt_templates:
+      - "What does a typical day look like for you?"
+      - "What do you usually do in the morning?"
+      - "Tell me about your daily routine."
+    fallback_nudges:
+      - "What time do you usually wake up?"
+      - "What do you do after work or school?"
+    tags: [routine, present]
+    target_skills:
+      vocabulary_description: 0.5
+      agreement: 0.3
+      preposition_usage: 0.2
+    cefr_domains: [description, conversation]
+
+  - arm_id: narration_background
+    intent: "Elicit imperfect tense for background/scene-setting in narration (weather, feelings, ongoing actions)"
+    cefr_min: "A2+"
+    prompt_templates:
+      - "Think back to a childhood memory — what was happening around you?"
+      - "Describe the scene the last time you went on holiday. What was the weather like? How were you feeling?"
+      - "Tell me about a day when everything was going wrong. What was happening?"
+    fallback_nudges:
+      - "What was the weather like that day?"
+      - "How were you feeling at that moment?"
+    tags: [narration, imperfect, background]
+    target_skills:
+      past_narration: 0.6
+      vocabulary_description: 0.4
+    cefr_domains: [narration, description]
+
+  - arm_id: subjunctive_opinion
+    intent: "Elicit subjunctive mood in opinion/belief expressions (penso che sia, credo che, vorrei che)"
+    cefr_min: "B1"
+    prompt_templates:
+      - "What do you think is important for a happy life?"
+      - "Do you think it's possible that technology changes the way we communicate?"
+      - "What would you want your city to improve?"
+    fallback_nudges:
+      - "Do you think it's necessary that everyone learns a second language?"
+      - "What do you hope happens in the future?"
+    tags: [subjunctive, opinion]
+    target_skills:
+      subjunctive_mood: 0.7
+      vocabulary_description: 0.3
+    cefr_domains: [opinion, conversation]
+
+  - arm_id: preposition_spatial
+    intent: "Elicit spatial/directional language with prepositions (directions, locations, movement)"
+    cefr_min: "A2"
+    prompt_templates:
+      - "Can you describe how to get from your home to the nearest shop?"
+      - "Where is your favorite café? Describe its location."
+      - "Imagine giving directions to a tourist in your city. How would you guide them?"
+    fallback_nudges:
+      - "What is next to your house?"
+      - "Where do you usually go after work?"
+    tags: [preposition, spatial, direction]
+    target_skills:
+      preposition_usage: 0.6
+      vocabulary_description: 0.4
+    cefr_domains: [description, conversation]

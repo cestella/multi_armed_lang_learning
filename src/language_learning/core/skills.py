@@ -21,6 +21,7 @@ ERROR_SKILL_MAP: dict[str, list[str]] = {
     "vocabulary": ["vocabulary_description"],
     "spelling": ["spelling_accuracy"],
     "preposition": ["preposition_usage"],
+    "subjunctive": ["subjunctive_mood"],
 }
 
 LEARNING_RATE = 0.15

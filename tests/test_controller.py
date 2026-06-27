@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import shutil
 from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 
@@ -30,10 +29,15 @@ from language_learning.storage.memory import InMemoryStorage
 ARMS_DIR = Path(__file__).parent.parent / "arms"
 
 
-def _arms_list() -> list[dict]:
+def _arms_list():
     import yaml
     with open(ARMS_DIR / "arms.yaml") as f:
         return yaml.safe_load(f)["arms"]
+
+
+def _arm_objects():
+    from language_learning.models.arms import Arm
+    return [Arm(**a) for a in _arms_list()]
 
 
 def _mock_evaluation(**kw) -> EvaluationResult:
@@ -56,7 +60,7 @@ def _mock_evaluation(**kw) -> EvaluationResult:
 
 @pytest.fixture
 def storage():
-    return InMemoryStorage(arms=_arms_list())
+    return InMemoryStorage()
 
 
 @pytest.fixture
@@ -66,12 +70,15 @@ def config():
 
 @pytest.fixture
 def controller(storage, config):
-    ctrl = Controller(language="it", config=config, storage=storage)
+    ctrl = Controller(language="it", config=config, storage=storage, arms=_arm_objects())
     # Mock the LLM client so no real API calls are made
     ctrl.llm_client = MagicMock(spec=LLMClient)
     ctrl.llm_client.evaluate = AsyncMock(return_value=_mock_evaluation())
     ctrl.llm_client.generate_response = AsyncMock(return_value="Ciao! Come stai oggi?")
     ctrl.llm_client.initiate = AsyncMock(return_value="Benvenuto! Parliamo di viaggi.")
+    ctrl.llm_client.generate_story = AsyncMock(
+        return_value="Ieri Marco è andato al mercato. Ha comprato le mele.\n\nTu cosa avresti comprato?"
+    )
     return ctrl
 
 
@@ -83,7 +90,7 @@ class TestInitialize:
     async def test_creates_default_bandit_state(self, controller, storage):
         await controller.initialize()
         assert controller.bandit_state is not None
-        assert len(controller.bandit_state.arms) == 7
+        assert len(controller.bandit_state.arms) == 12
 
     async def test_selects_initial_arm(self, controller):
         await controller.initialize()
@@ -319,7 +326,7 @@ class TestProcessTurn:
         assert new_profile is not None
 
     async def test_spanish_fallback_message(self, config, storage):
-        ctrl = Controller(language="es", config=config, storage=storage)
+        ctrl = Controller(language="es", config=config, storage=storage, arms=_arm_objects())
         ctrl.llm_client = MagicMock(spec=LLMClient)
         ctrl.llm_client.evaluate = AsyncMock(return_value=_mock_evaluation())
         ctrl.llm_client.generate_response = AsyncMock(side_effect=LLMError("fail"))
@@ -629,10 +636,53 @@ class TestConstructorValidation:
         assert ctrl.storage is storage
 
     def test_data_dir_creates_filesystem_storage(self, config, tmp_path):
-        # Create arms directory
-        arms_dst = tmp_path / "arms" / "arms.yaml"
-        arms_dst.parent.mkdir(parents=True)
-        shutil.copy(ARMS_DIR / "arms.yaml", arms_dst)
         ctrl = Controller(language="it", config=config, data_dir=str(tmp_path))
         from language_learning.storage.filesystem import FilesystemStorage
         assert isinstance(ctrl.storage, FilesystemStorage)
+
+
+# ---------------------------------------------------------------------------
+# Story session
+# ---------------------------------------------------------------------------
+
+class TestStorySession:
+    async def test_start_story_session_calls_generate_story(self, controller, storage):
+        await controller.initialize()
+        await controller.start_story_session("a lost key", "encouraging")
+        controller.llm_client.generate_story.assert_called_once()
+
+    async def test_story_appended_as_assistant_message(self, controller, storage):
+        await controller.initialize()
+        await controller.start_story_session("a lost key", "encouraging")
+        assistant_msgs = [m for m in controller.app_state.chat_messages if m.role == "assistant"]
+        assert len(assistant_msgs) >= 1
+        assert "Marco" in assistant_msgs[-1].text
+
+    async def test_story_session_is_active(self, controller, storage):
+        await controller.initialize()
+        await controller.start_story_session("a lost key", "encouraging")
+        assert controller.session_context is not None
+        assert controller.session_context.topic == "a lost key"
+
+    async def test_story_session_warmup_flag_set(self, controller, storage):
+        await controller.initialize()
+        await controller.start_story_session("a lost key", "encouraging")
+        assert controller._warmup_pending is True
+
+    async def test_reply_after_story_flows_normally(self, controller, storage):
+        await controller.initialize()
+        await controller.start_story_session("a lost key", "encouraging")
+        # Now send a user reply — should go through normal process_turn
+        await controller.process_turn("Io avrei comprato le arance!")
+        controller.llm_client.evaluate.assert_called_once()
+
+    async def test_story_no_pending_reward(self, controller, storage):
+        await controller.initialize()
+        await controller.start_story_session("a lost key", "encouraging")
+        # Story opener should not create a pending reward
+        assert controller._pending_reward is None
+
+    async def test_story_session_with_cefr_override(self, controller, storage):
+        await controller.initialize()
+        await controller.start_story_session("travel", "encouraging", cefr_override="A2")
+        assert controller.cefr_override == "A2"

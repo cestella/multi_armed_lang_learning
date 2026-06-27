@@ -30,7 +30,7 @@ _DOMAIN_SKILLS: dict[str, list[str]] = {
     "conversation": ["vocabulary_description", "agreement"],
     "description": ["vocabulary_description", "agreement"],
     "narration": ["past_narration", "vocabulary_description"],
-    "opinion": ["conditional_future", "vocabulary_description", "agreement"],
+    "opinion": ["conditional_future", "vocabulary_description", "agreement", "subjunctive_mood"],
     "comprehension": ["vocabulary_description"],
 }
 
@@ -129,6 +129,14 @@ def _recompute_estimates(state: CefrState, skill_state: SkillState) -> None:
         if weight_sum > 0:
             overall_score = weighted_sum / weight_sum
             overall_confidence = weight_sum / importance_sum
+
+            # Early-promotion guard: clamp score based on total observations
+            total_domain_turns = sum(ev.turn_count for ev in state.evidence.values())
+            if total_domain_turns < 5:
+                overall_score = min(overall_score, 19.9)   # cap at A1
+            elif total_domain_turns < 10:
+                overall_score = min(overall_score, 39.9)   # cap at A2
+
             state.overall_estimate = _score_to_label(overall_score, overall_confidence)
             state.confidence["overall"] = round(overall_confidence, 2)
         else:
